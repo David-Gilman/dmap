@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+{% block body %}
+<script type="text/javascript">
+  $(function() {
+    $('a#calculate').bind('click', function() {
+      $.getJSON($SCRIPT_ROOT + '/_map', {
+        lat: $('input[name="lat"]').val(),
+        long: $('input[name="long"]').val(),
+      }, function(data) {
+        $("#result").text(data.result);
+      });
+      return false;
+    });
+  });
+</script>
+<head>
+<style type="text/css">
+body { background-color: #eeeeee; /* light gray */ font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; font-weight: 500; font-size: 14px; color: #1e1e1e; /* dark gray */ }
+</style>
+</head>
+<h1>Disaster Map</h1>
+<p>Click "Google Maps" to view a cached heatmap. Enter a latitude and longitude and click "Get Results," then "Google Maps" to get live data, though there may be a delay.</p>
+<p>Latitude: <input type=text size=15 name=lat> Longitude: 
+   <input type=text size=15 name=long>
+<p><a href=# id=calculate>Get Results</a>
+<a href="out">Google Maps</a>
+{% endblock %}
